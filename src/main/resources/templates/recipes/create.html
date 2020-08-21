@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+<h1>Create Recipe</h1>
+<header th:replace="fragments :: header"></header>
+<div>
+    <label>Name
+       <input th:field="${recipe.name}">
+    </label>
+    <p th:errors="${recipe.name}"></p>
+</div>
+<div>
+    <label>Ingredients
+        <input th:field="${recipe.name}">
+    </label>
+    <p th:errors="${recipe.name}"></p>
+</div>
+<div>
+    <label>Directions
+        <input th:field="${recipe.name}">
+    </label>
+    <p th:errors="${recipe.name}"></p>
+</div>
+</body>
+</html>

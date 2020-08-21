@@ -1,8 +1,15 @@
 package org.launchcode.RecipeOmatic;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
+@MappedSuperclass
 public class AbstractEntity {
+
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
 
