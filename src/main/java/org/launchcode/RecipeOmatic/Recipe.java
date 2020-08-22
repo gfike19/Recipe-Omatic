@@ -1,18 +1,25 @@
 package org.launchcode.RecipeOmatic;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Recipe extends AbstractEntity{
 
+    @Column
+    private String name;
+
+    @ManyToMany
+    @Column
     private List<Ingredient> ingredients = new ArrayList<>();
-    private Directions directions;
+
+    @Column
+    private String directions;
 
     public Recipe(){}
 
-    public Recipe(List<Ingredient> ingredients, Directions directions) {
+    public Recipe(List<Ingredient> ingredients, String directions) {
         super();
         this.ingredients = ingredients;
         this.directions = directions;
@@ -26,11 +33,19 @@ public class Recipe extends AbstractEntity{
         this.ingredients = ingredients;
     }
 
-    public Directions getDirections() {
+    public String getDirections() {
         return directions;
     }
 
-    public void setDirections(Directions directions) {
+    public void setDirections(String directions) {
         this.directions = directions;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,6 +1,5 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
-import org.launchcode.RecipeOmatic.Data.DirectionsRepository;
 import org.launchcode.RecipeOmatic.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Data.RecipeRepository;
 import org.launchcode.RecipeOmatic.Recipe;
@@ -23,22 +22,18 @@ public class ListController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    @Autowired
-    private DirectionsRepository directionsRepository;
-
     static HashMap<String, String> columnChoices = new HashMap<>();
 
     public ListController () {
         columnChoices.put("all", "All");
         columnChoices.put("ingredient", "Ingredient");
-        columnChoices.put("directions", "Directions");
+        columnChoices.put("recipe", "Recipe");
     }
 
     @RequestMapping("")
     public String list(Model model) {
-        model.addAttribute("recipes", recipeRepository.findAll());
+        model.addAttribute("recipe", recipeRepository.findAll());
         model.addAttribute("ingredient", ingredientRepository.findAll());
-        model.addAttribute("directions", directionsRepository.findAll());
         return "list";
     }
 

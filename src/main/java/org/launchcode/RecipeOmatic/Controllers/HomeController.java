@@ -1,6 +1,5 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
-import org.launchcode.RecipeOmatic.Data.DirectionsRepository;
 import org.launchcode.RecipeOmatic.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Data.RecipeRepository;
 import org.launchcode.RecipeOmatic.Recipe;
@@ -22,8 +21,6 @@ public class HomeController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    @Autowired
-    private DirectionsRepository directionsRepository;
 
     @RequestMapping("")
     public String index(Model model){
