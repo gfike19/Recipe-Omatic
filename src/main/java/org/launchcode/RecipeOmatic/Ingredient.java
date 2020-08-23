@@ -1,7 +1,6 @@
 package org.launchcode.RecipeOmatic;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Ingredient extends AbstractEntity{

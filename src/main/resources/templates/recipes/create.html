@@ -5,7 +5,7 @@
 
 <body>
 <h1>Create Recipe</h1>
-<header th:replace="fragments :: header"></header>
+<div th:replace="fragments :: page-header"></div>
 <div>
     <label>Name
        <input th:field="${recipe.name}">
@@ -23,6 +23,16 @@
         <input th:field="${recipe.name}">
     </label>
     <p th:errors="${recipe.name}"></p>
+</div>
+<div>
+    <label> Type
+        <select th:field="${recipe.type}">
+            <option th:each="type : ${types}"
+                    th:value="${type}"
+                    th:text="${type.displayName}"
+            ></option>
+        </select>
+    </label>
 </div>
 </body>
 </html>

@@ -26,8 +26,8 @@ public class ListController {
 
     public ListController () {
         columnChoices.put("all", "All");
-        columnChoices.put("ingredient", "Ingredient");
-        columnChoices.put("recipe", "Recipe");
+        columnChoices.put("ingredients", "Ingredients");
+        columnChoices.put("recipes", "Recipes");
     }
 
     @RequestMapping("")

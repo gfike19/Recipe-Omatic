@@ -1,9 +1,12 @@
 package org.launchcode.RecipeOmatic;
 
-import com.sun.istack.NotNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class User extends AbstractEntity{
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+
+@Entity
+public class EndUser extends AbstractEntity {
 
     @NotNull
     private String username;
@@ -13,9 +16,9 @@ public class User extends AbstractEntity{
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User() {}
+    public EndUser() {}
 
-    public User(String username, String password) {
+    public EndUser(String username, String password) {
         this.username = username;
         this.pwHash = encoder.encode(password);
     }
@@ -27,4 +30,5 @@ public class User extends AbstractEntity{
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
     }
+
 }

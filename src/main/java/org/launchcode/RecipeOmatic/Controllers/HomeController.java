@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("index")
 public class HomeController {
 
     @Autowired

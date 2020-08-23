@@ -1,5 +1,6 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
+import org.launchcode.RecipeOmatic.DTO.RecipeType;
 import org.launchcode.RecipeOmatic.Data.RecipeRepository;
 import org.launchcode.RecipeOmatic.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class RecipeController {
     @Autowired
     private RecipeRepository recipeRepository;
 
-    @GetMapping
+    @GetMapping("")
     public String displayAllRecipes(Model model) {
         model.addAttribute("title", "All Recipes");
         model.addAttribute("recipes", recipeRepository.findAll());
@@ -28,6 +29,7 @@ public class RecipeController {
     public String displayCreateRecipeForm(Model model){
         model.addAttribute("title", "Create Recipe");
         model.addAttribute(new Recipe());
+        model.addAttribute("types", RecipeType.values());
         return "recipes/create";
     }
 

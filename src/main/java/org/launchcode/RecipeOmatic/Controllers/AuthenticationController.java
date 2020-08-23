@@ -3,7 +3,7 @@ package org.launchcode.RecipeOmatic.Controllers;
 import org.launchcode.RecipeOmatic.DTO.LoginFormDTO;
 import org.launchcode.RecipeOmatic.DTO.RegisterFormDTO;
 import org.launchcode.RecipeOmatic.Data.UserRepository;
-import org.launchcode.RecipeOmatic.User;
+import org.launchcode.RecipeOmatic.EndUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -22,25 +23,25 @@ public class AuthenticationController {
     @Autowired
     UserRepository userRepository;
 
-    private static final String userSessionKey = "user";
+    private static final String userSessionKey = "endUser";
 
-    public User getUserFromSession(HttpSession session) {
+    public EndUser getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
         if (userId == null) {
             return null;
         }
 
-        Optional<User> user = userRepository.findById(userId);
+        Optional<EndUser> endUser = userRepository.findById(userId);
 
-        if (user.isEmpty()) {
+        if (endUser.isEmpty()) {
             return null;
         }
 
-        return user.get();
+        return endUser.get();
     }
 
-    private static void setUserInSession(HttpSession session, User user) {
-        session.setAttribute(userSessionKey, user.getId());
+    private static void setUserInSession(HttpSession session, EndUser aEndUser) {
+        session.setAttribute(userSessionKey, aEndUser.getId());
     }
 
     @GetMapping("/register")
@@ -60,9 +61,9 @@ public class AuthenticationController {
             return "register";
         }
 
-        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
+        EndUser existingEndUser = userRepository.findByUsername(registerFormDTO.getUsername());
 
-        if (existingUser != null) {
+        if (existingEndUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
             model.addAttribute("title", "Register");
             return "register";
@@ -76,9 +77,9 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
-        userRepository.save(newUser);
-        setUserInSession(request.getSession(), newUser);
+        EndUser newEndUser = new EndUser(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        userRepository.save(newEndUser);
+        setUserInSession(request.getSession(), newEndUser);
 
         return "redirect:";
     }
@@ -100,9 +101,9 @@ public class AuthenticationController {
             return "login";
         }
 
-        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
+        EndUser theEndUser = userRepository.findByUsername(loginFormDTO.getUsername());
 
-        if (theUser == null) {
+        if (theEndUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
             model.addAttribute("title", "Log In");
             return "login";
@@ -110,13 +111,13 @@ public class AuthenticationController {
 
         String password = loginFormDTO.getPassword();
 
-        if (!theUser.isMatchingPassword(password)) {
+        if (!theEndUser.isMatchingPassword(password)) {
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Log In");
             return "login";
         }
 
-        setUserInSession(request.getSession(), theUser);
+        setUserInSession(request.getSession(), theEndUser);
 
         return "redirect:";
     }
@@ -126,5 +127,4 @@ public class AuthenticationController {
         request.getSession().invalidate();
         return "redirect:/login";
     }
-
 }

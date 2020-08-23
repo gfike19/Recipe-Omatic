@@ -1,5 +1,6 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
+import org.launchcode.RecipeOmatic.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Data.RecipeRepository;
 import org.launchcode.RecipeOmatic.Recipe;
 import org.launchcode.RecipeOmatic.RecipeData;
@@ -19,9 +20,15 @@ public class SearchController {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
+
     @RequestMapping("")
     public String search(Model model){
         model.addAttribute("columns", columnChoices);
+        model.addAttribute("recipes", recipeRepository.findAll());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "search";
     }
 
