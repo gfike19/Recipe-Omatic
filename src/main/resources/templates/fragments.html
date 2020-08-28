@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 
 <head th:fragment="head">
-
-    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <link th:href="@{/bootstrap.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
-
-    <title th:text="'Recipes' + ${title == null ? '' : ' :: ' + title}">Recipes</title>
+    <title th:text="'Recipes' + ${title == null ? '' : ' :: ' + title}">Recipe-Omatic</title>
 </head>
 
 <body>
 
-<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a th:href="@{/}" class="navbar-brand">Recipes</a>
+<div th:fragment="page-header">
+    <div>
+        <div>
+            <a th:href="@{/}">Recipes</a>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+        <div>
+            <ul>
                 <li><a th:href="@{/list}">List</a></li>
                 <li><a th:href="@{/search}">Search</a></li>
-                <li><a th:href="@{/add}">Add Recipe</a></li>
+                <li><a th:href="@{/recipes/create}">Add Recipe</a></li>
             </ul>
         </div>
     </div>

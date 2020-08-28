@@ -4,35 +4,40 @@
 <head th:replace="fragments :: head"></head>
 
 <body>
+
 <h1>Create Recipe</h1>
 <div th:replace="fragments :: page-header"></div>
-<div>
-    <label>Name
-       <input th:field="${recipe.name}">
-    </label>
-    <p th:errors="${recipe.name}"></p>
-</div>
-<div>
-    <label>Ingredients
-        <input th:field="${recipe.name}">
-    </label>
-    <p th:errors="${recipe.name}"></p>
-</div>
-<div>
-    <label>Directions
-        <input th:field="${recipe.name}">
-    </label>
-    <p th:errors="${recipe.name}"></p>
-</div>
-<div>
-    <label> Type
-        <select th:field="${recipe.type}">
-            <option th:each="type : ${types}"
-                    th:value="${type}"
-                    th:text="${type.displayName}"
-            ></option>
-        </select>
-    </label>
-</div>
+<form method="post">
+    <div>
+        <label>Name
+            <input th:field="${recipe.name}">
+        </label>
+        <p th:errors="${recipe.name}"></p>
+    </div>
+    <div>
+        <label>Ingredients
+            <input th:field="${recipe.ingredients}">
+        </label>
+        <p th:errors="${recipe.ingredients}"></p>
+    </div>
+    <div>
+        <label>Directions
+            <input th:field="${recipe.directions}">
+        </label>
+        <p th:errors="${recipe.directions}"></p>
+    </div>
+    <div>
+        <label> Category
+            <select th:field="${recipe.type}">
+                <option th:each="type : ${types}"
+                        th:value="${type}"
+                        th:text="${type.displayName}"
+                ></option>
+            </select>
+        </label>
+
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    </div>
+</form>
 </body>
 </html>

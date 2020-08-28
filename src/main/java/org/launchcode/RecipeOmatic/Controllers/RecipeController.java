@@ -1,7 +1,9 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
 import org.launchcode.RecipeOmatic.DTO.RecipeType;
+import org.launchcode.RecipeOmatic.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Data.RecipeRepository;
+import org.launchcode.RecipeOmatic.Ingredient;
 import org.launchcode.RecipeOmatic.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -18,10 +21,14 @@ public class RecipeController {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
     @GetMapping("")
     public String displayAllRecipes(Model model) {
         model.addAttribute("title", "All Recipes");
         model.addAttribute("recipes", recipeRepository.findAll());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "recipes/index";
     }
 
@@ -34,7 +41,8 @@ public class RecipeController {
     }
 
     @PostMapping("create")
-    public String processCreateRecipeForm(@ModelAttribute Recipe newRecipe, Errors errors, Model model){
+    public String processCreateRecipeForm(@ModelAttribute Recipe newRecipe, Errors errors, Model model,
+                                          List<String> Ingredient){
 
         if(errors.hasErrors()){
             model.addAttribute("errors", errors);

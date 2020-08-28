@@ -3,9 +3,9 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 
-<div th:replace="fragments :: page-header"></div>
+<header th:replace="fragments :: page-header"></header>
 
-<form method="post">
+<form method="post" style="padding-top:60px;">
     <div class="form-group">
         <label th:for="username">Username
             <input class="form-control" th:field="${loginFormDTO.username}">

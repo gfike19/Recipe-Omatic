@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("index")
 public class HomeController {
 
     @Autowired
@@ -38,15 +37,15 @@ public class HomeController {
             model.addAttribute("recipe", recipe);
             return "view";
         } else {
-            model.addAttribute("title", "Invalid Job ID: " + recipeId);
+            model.addAttribute("title", "Invalid recipe ID: " + recipeId);
             return "redirect:";
         }
     }
 
-    @GetMapping("list-recipes")
+    @GetMapping("recipeList")
     public String viewAllRecipes(Model model) {
         model.addAttribute("recipes", recipeRepository.findAll());
-        return "list-recipes";
+        return "recipeList";
     }
 
 

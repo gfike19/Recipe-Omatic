@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 
 <head th:replace="fragments :: head"></head>
 
@@ -8,11 +8,10 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div>
-    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
     <h2>View Recipes By Category</h2>
 </div>
 
-<table class="centeredTable">
+<table>
     <tr>
         <th>All</th>
         <th>Mexican</th>
@@ -30,8 +29,8 @@
             </li>
         </td>
         <td>
-            <li th:each="employer : ${employers}">
-                <a th:href="@{/list/jobs(column=employer,value=${employer.name})}" th:text="${employer.name}"></a>
+            <li th:each="recipe : ${recipes}">
+                <a th:href="@{/list/recipes(column=recipe,value=${recipe.name})}" th:text="${recipe.name}"></a>
             </li>
         </td>
     </tr>

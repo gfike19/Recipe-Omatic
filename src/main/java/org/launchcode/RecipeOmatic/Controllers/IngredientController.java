@@ -25,19 +25,19 @@ public class IngredientController {
         return "ingredients/index";
     }
 
-    @GetMapping("add")
+    @GetMapping("create")
     public String displayAddIngredientForm(Model model){
         model.addAttribute("title", "Add Ingredient");
         model.addAttribute(new Ingredient());
-        return "ingredients/add";
+        return "ingredients/create";
     }
 
-    @PostMapping("add")
+    @PostMapping("create")
     public String processAddIngredientForm(@ModelAttribute Ingredient newIngredient, Errors errors, Model model){
 
         if(errors.hasErrors()){
             model.addAttribute("errors", errors);
-            return "ingredients/add";
+            return "ingredients/create";
         }
         ingredientRepository.save(newIngredient);
         return "redirect:";

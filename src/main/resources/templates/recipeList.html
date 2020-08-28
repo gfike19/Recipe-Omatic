@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div>
+
+    <table>
+        <tr th:each="recipe : ${recipes}">
+            <td>
+                <p>
+                    Recipe Id:
+                    <a th:href="@{'/view/' + ${recipe.id}}" th:text="${recipe.id}"></a>
+                </p>
+                <p th:text="${'Name: ' + recipe.name}"></p>
+                <p>
+                    Ingredient:
+                    <a th:href="@{'/ingredients/view/' + ${recipe.ingredient.id}}" th:text="${recipe.ingredient.name}"></a>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
