@@ -1,19 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+<style>
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 300px;
+}
 
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+</style>
 <body>
 
 <div th:replace="fragments :: page-header"></div>
-<div>
-    <h2>Recipes</h2>
-    <ul>
-        <li th:each="recipe : ${recipes}">
-            <a th:href="@{'/view/' + ${recipe.id}}" th:text="${recipe.name}"></a>
-        </li>
-    </ul>
-
+<div class="jumbotron">
+    <h1 class="display-3">Welcome to RecipeOmatic!</h1>
+    <p class="lead">Your recipe storage app</p>
 </div>
+<div class="card mb-3 gallery" >
+    <h3 class="card-header" >Mexican</h3>
+    <img style="height: 200px; width: 100%; display: block;" src="/images/tacos.jpg" alt="Card image">
+    <div class="card-body">
+        <p class="card-text">Mexican delights!</p>
+    </div>
+</div>
+<div class="card mb-3 gallery">
+    <h3 class="card-header">American</h3>
+    <img style="height: 200px; width: 100%; display: block;" src="/images/cheeseburgers.jpg" alt="Card image">
+    <div class="card-body">
+        <p class="card-text">Eat like a 'merican!</p>
+    </div>
+</div>
+<div class="card mb-3 gallery">
+    <h3 class="card-header">Italian</h3>
+    <img style="height: 200px; width: 100%; display: block;" src="/images/alfredo.jpg" alt="Card image">
+    <div class="card-body">
+        <p class="card-text">It'sa some pasta!</p>
+    </div>
+</div>
+<div class="card mb-3 gallery">
+    <h3 class="card-header">Dessert</h3>
+    <img style="height: 200px; width: 100%; display: block;" src="/images/cheesecake.jpg" alt="Card image">
+    <div class="card-body">
+        <p class="card-text">Little bites of heaven!</p>
+    </div>
+</div>
+
 </body>
 
 </html>

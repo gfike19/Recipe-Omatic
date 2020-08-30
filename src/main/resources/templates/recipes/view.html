@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<body class="container  body-content">
+
+<h1 th:text="${'Recipe: ' + recipe.name}">Default Title</h1>
+
+<div>
+    <p th:text="${'ID: ' + recipe.id}"></p>
+    <p th:text="${'Name: ' + recipe.name}"></p>
+    <p th:text="${'Ingredients: ' + recipe.ingredients}"></p>
+    <p th:text="${'Directions: ' + recipe.directions}"></p>
+    <p th:text="${'Category: ' + recipe.type}"></p>
+</div>
+
+
+</body>
+</html>

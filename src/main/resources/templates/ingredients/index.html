@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
 <body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<p th:unless="${ingredients} and ${ingredients.size()}">No Ingredients!</p>
+
+<div>
+    <h2>Ingredients</h2>
+    <ul>
+        <li th:each="ingredient : ${ingredients}">
+            <a th:href="@{'/ingredients/view/' + ${ingredient.id}}" th:text="${ingredient.name}"></a>
+        </li>
+    </ul>
+    <a th:href="@{'/ingredients/create'}">Add ingredients!</a>
+
+</div>
+
 
 </body>
 </html>

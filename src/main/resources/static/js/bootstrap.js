@@ -23,7 +23,7 @@ tr:nth-child(odd) {
     margin-right: auto;
 }
 
-table{
+table {
     margin: 30px auto;
     border: 1px solid #e4e4e4;
     width: 80%;

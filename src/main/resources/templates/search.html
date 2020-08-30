@@ -44,8 +44,8 @@
                 </p>
                 <p th:text="${'Name: ' + recipe.name}"></p>
                 <p>
-                    Ingredients:
-                    <a th:href="@{'/ingredients/view/' + ${recipe.ingredients.id}}" th:text="${recipe.ingredients.name}"></a>
+                    Type:
+                    <a th:href="@{'/ingredients/view/' + ${recipe.category}}" th:text="${recipe.category}"></a>
                 </p>
 
             </td>

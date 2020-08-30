@@ -1,20 +1,29 @@
 package org.launchcode.RecipeOmatic;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Ingredient extends AbstractEntity{
 
+    @ManyToMany(mappedBy = "ingredients")
+    private List<Recipe> recipes = new ArrayList<>();
+
+    @Column
     private int quantity;
 
-    private String ingredient;
+    @Column
+    private String name;
 
     public Ingredient(){}
 
-    public Ingredient(int quantity, String ingredient){
+    public Ingredient(int quantity, String name){
         super();
         this.quantity = quantity;
-        this.ingredient = ingredient;
+        this.name = name;
     }
 
     public int getQuantity() {
@@ -25,11 +34,19 @@ public class Ingredient extends AbstractEntity{
         this.quantity = quantity;
     }
 
-    public String getIngredient() {
-        return ingredient;
+    public String getName() {
+        return name;
     }
 
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
     }
 }

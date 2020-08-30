@@ -4,25 +4,17 @@
 <head th:replace="fragments :: head"></head>
 
 <body>
-<h1>Create Recipe</h1>
 <div th:replace="fragments :: page-header"></div>
-<div>
-    <label>Name
-        <input th:field="${recipe.name}">
-    </label>
-    <p th:errors="${recipe.name}"></p>
-</div>
-<div>
-    <label>Ingredients
-        <input th:field="${recipe.name}">
-    </label>
-    <p th:errors="${recipe.name}"></p>
-</div>
-<div>
-    <label>Directions
-        <input th:field="${recipe.name}">
-    </label>
-    <p th:errors="${recipe.name}"></p>
-</div>
+
+<h1>Add Ingredient</h1>
+<form method="post">
+    <div>
+        <label class="col-form-label">Ingredient
+            <input class="form-control" th:field="${ingredient.name}">
+        </label>
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    </div>
+</form>
+
 </body>
 </html>

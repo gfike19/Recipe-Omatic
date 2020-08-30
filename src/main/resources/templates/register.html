@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
 <head th:replace="fragments :: head"></head>
-<body class="container">
 
-<header th:replace="fragments :: page-header"></header>
+<div th:replace="fragments :: page-header"></div>
 
-<form method="post" style="padding-top:60px;">
+<body>
+
+<form method="post" style="margin: auto;padding-top:60px;width: 50%;">
     <div class="form-group">
         <label>Username
             <input class="form-control" th:field="${registerFormDTO.username}" />

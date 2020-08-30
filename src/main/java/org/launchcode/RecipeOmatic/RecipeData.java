@@ -32,10 +32,10 @@ public class RecipeData {
         String theValue;
         if (fieldName.equals("name")){
             theValue = recipe.getName();
-        } else if (fieldName.equals("ingredient")){
-            theValue = recipe.getIngredients().toString();
+        } else if (fieldName.equals("category")){
+            theValue = recipe.getType().toString();
         } else {
-            theValue = recipe.getDirections().toString();
+            theValue = recipe.getIngredients().toString();
         }
 
         return theValue;
@@ -52,7 +52,7 @@ public class RecipeData {
                 results.add(recipe);
             } else if (recipe.getIngredients().toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
-            } else if (recipe.getDirections().toString().toLowerCase().contains(lower_val)) {
+            } else if (recipe.getType().toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
             } else if (recipe.toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);

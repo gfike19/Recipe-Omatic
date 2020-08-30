@@ -1,5 +1,6 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
+import org.launchcode.RecipeOmatic.DTO.RecipeType;
 import org.launchcode.RecipeOmatic.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Data.RecipeRepository;
 import org.launchcode.RecipeOmatic.Recipe;
@@ -28,12 +29,14 @@ public class ListController {
         columnChoices.put("all", "All");
         columnChoices.put("ingredients", "Ingredients");
         columnChoices.put("recipes", "Recipes");
+        columnChoices.put("types", "Types");
     }
 
     @RequestMapping("")
     public String list(Model model) {
         model.addAttribute("recipe", recipeRepository.findAll());
         model.addAttribute("ingredient", ingredientRepository.findAll());
+        model.addAttribute("type", RecipeType.values());
         return "list";
     }
 
@@ -49,6 +52,6 @@ public class ListController {
         }
         model.addAttribute("recipes", recipes);
 
-        return "list-recipes";
+        return "recipeList";
     }
 }

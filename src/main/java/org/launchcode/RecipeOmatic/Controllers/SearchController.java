@@ -1,5 +1,6 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
+import org.launchcode.RecipeOmatic.DTO.RecipeType;
 import org.launchcode.RecipeOmatic.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Data.RecipeRepository;
 import org.launchcode.RecipeOmatic.Recipe;
@@ -29,19 +30,20 @@ public class SearchController {
         model.addAttribute("columns", columnChoices);
         model.addAttribute("recipes", recipeRepository.findAll());
         model.addAttribute("ingredients", ingredientRepository.findAll());
+        model.addAttribute("category", RecipeType.values());
         return "search";
     }
 
     @PostMapping("results")
-    public String displaySearchResults(Model model, @RequestParam String type, @RequestParam String term){
+    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
         Iterable<Recipe> recipes;
-        if(term.toLowerCase().equals("all") || term.equals("")){
+        if(searchTerm.toLowerCase().equals("all") || searchTerm.equals("")){
             recipes = recipeRepository.findAll();
         }else {
-            recipes = RecipeData.findByColumnAndValue(type, term, recipeRepository.findAll());
+            recipes = RecipeData.findByColumnAndValue(searchType, searchTerm, recipeRepository.findAll());
         }
-        model.addAttribute("column", "choices");
-        model.addAttribute("title", "Recipes with " + columnChoices.get(type) + ": " + term);
+        model.addAttribute("column", columnChoices);
+        model.addAttribute("title", "Recipes with " + columnChoices.get(searchType) + ": " + searchTerm);
         model.addAttribute("recipes", recipes);
         return "search";
     }

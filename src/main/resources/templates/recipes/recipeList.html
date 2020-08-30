@@ -16,10 +16,6 @@
                     <a th:href="@{'/view/' + ${recipe.id}}" th:text="${recipe.id}"></a>
                 </p>
                 <p th:text="${'Name: ' + recipe.name}"></p>
-                <p>
-                    Ingredient:
-                    <a th:href="@{'/ingredients/view/' + ${recipe.ingredient.id}}" th:text="${recipe.ingredient.name}"></a>
-                </p>
             </td>
         </tr>
     </table>

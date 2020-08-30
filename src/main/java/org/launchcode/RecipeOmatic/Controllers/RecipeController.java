@@ -1,5 +1,6 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
+import org.launchcode.RecipeOmatic.DTO.RecipeDTO;
 import org.launchcode.RecipeOmatic.DTO.RecipeType;
 import org.launchcode.RecipeOmatic.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Data.RecipeRepository;
@@ -37,17 +38,20 @@ public class RecipeController {
         model.addAttribute("title", "Create Recipe");
         model.addAttribute(new Recipe());
         model.addAttribute("types", RecipeType.values());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "recipes/create";
     }
 
     @PostMapping("create")
-    public String processCreateRecipeForm(@ModelAttribute Recipe newRecipe, Errors errors, Model model,
-                                          List<String> Ingredient){
+    public String processCreateRecipeForm(@ModelAttribute Recipe newRecipe, Errors errors, Model model){
 
         if(errors.hasErrors()){
             model.addAttribute("errors", errors);
             return "recipes/create";
         }
+//        List<Ingredient> item = (List<Ingredient>) ingredientRepository.findAll();
+//        newRecipe.setIngredients(item);
+//        model.addAttribute("ingredients", ingredientRepository.findAll());
         recipeRepository.save(newRecipe);
         return "redirect:";
     }
@@ -70,14 +74,24 @@ public class RecipeController {
     }
 
     @GetMapping("view/{recipeId}")
-    public String displayViewRecipe(Model model, @PathVariable int recipeId){
-        Optional optRecipe = recipeRepository.findById(recipeId);
-        if(optRecipe.isPresent()){
+    public String displayViewRecipe(Model model, @PathVariable int recipeId) {
+        Optional<Recipe> optRecipe = recipeRepository.findById(recipeId);
+        if (optRecipe.isPresent()) {
             Recipe recipe = (Recipe) optRecipe.get();
             model.addAttribute("recipe", recipe);
+            RecipeDTO recipeDTO = new RecipeDTO();
+            model.addAttribute("recipeDTO", recipeDTO);
             return "recipes/view";
         } else {
-            return "redirect:../";
+            model.addAttribute("title", "Invalid recipe ID: " + recipeId);
+            return "redirect:";
         }
     }
+
+    @GetMapping("recipeList")
+    public String viewAllRecipes(Model model) {
+        model.addAttribute("recipes", recipeRepository.findAll());
+        return "recipes/recipeList";
+    }
+
 }

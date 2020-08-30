@@ -1,8 +1,8 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
+import org.launchcode.RecipeOmatic.DTO.RecipeDTO;
 import org.launchcode.RecipeOmatic.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Ingredient;
-import org.launchcode.RecipeOmatic.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +29,7 @@ public class IngredientController {
     public String displayAddIngredientForm(Model model){
         model.addAttribute("title", "Add Ingredient");
         model.addAttribute(new Ingredient());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "ingredients/create";
     }
 
@@ -53,7 +54,7 @@ public class IngredientController {
     public String processDeleteIngredientForm(@RequestParam(required = false) int[] ingredientId){
         if(ingredientId != null){
             for(int id : ingredientId){
-
+                ingredientRepository.deleteById(id);
             }
         }
         return "redirect:";
@@ -65,6 +66,8 @@ public class IngredientController {
         if (optIngredient.isPresent()){
             Ingredient ingredient = (Ingredient) optIngredient.get();
             model.addAttribute("ingredient", ingredient);
+            RecipeDTO recipeDTO = new RecipeDTO();
+            model.addAttribute("recipeDTO", recipeDTO);
             return "ingredients/view";
         } else {
             return "redirect:../";
