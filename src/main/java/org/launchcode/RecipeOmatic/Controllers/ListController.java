@@ -1,5 +1,6 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
+import org.launchcode.RecipeOmatic.DTO.RecipeDTO;
 import org.launchcode.RecipeOmatic.DTO.RecipeType;
 import org.launchcode.RecipeOmatic.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Data.RecipeRepository;
@@ -8,10 +9,13 @@ import org.launchcode.RecipeOmatic.RecipeData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "list")
@@ -53,5 +57,28 @@ public class ListController {
         model.addAttribute("recipes", recipes);
 
         return "recipeList";
+    }
+
+    @GetMapping(value = "type")
+    public String displayByType(Model model){
+        model.addAttribute("type", RecipeType.values());
+        return "categoryList";
+    }
+
+    @GetMapping("view/{recipeId}")
+    public String displayViewRecipe(Model model, @PathVariable int recipeId) {
+        Optional<Recipe> optRecipe = recipeRepository.findById(recipeId);
+        if (optRecipe.isPresent()) {
+            Recipe recipe = (Recipe) optRecipe.get();
+            if(recipe.getType() == recipe.getType()){
+                model.addAttribute("recipe", recipe);
+                RecipeDTO recipeDTO = new RecipeDTO();
+                model.addAttribute("recipeDTO", recipeDTO);
+            }
+            return "view";
+        } else {
+            model.addAttribute("title", "Invalid recipe ID: " + recipeId);
+            return "redirect:";
+        }
     }
 }

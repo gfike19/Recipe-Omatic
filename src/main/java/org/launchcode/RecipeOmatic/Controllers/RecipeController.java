@@ -49,9 +49,7 @@ public class RecipeController {
             model.addAttribute("errors", errors);
             return "recipes/create";
         }
-//        List<Ingredient> item = (List<Ingredient>) ingredientRepository.findAll();
-//        newRecipe.setIngredients(item);
-//        model.addAttribute("ingredients", ingredientRepository.findAll());
+
         recipeRepository.save(newRecipe);
         return "redirect:";
     }

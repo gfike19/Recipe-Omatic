@@ -6,9 +6,8 @@
 <body>
 
 <div th:replace="fragments :: page-header"></div>
-
 <h1>Create Recipe</h1>
-
+<script type="text/javascript" language="JavaScript" th:src="@{/js/script.js}"></script>
 <form method="post">
     <div>
         <label>Name
@@ -16,8 +15,7 @@
         </label>
         <p th:errors="${recipe.name}"></p>
     </div>
-    <div>
-        <label>Ingredients: </label>
+        <div id="dynamicInput" class="form-inline">Ingredients:
         <label>Quantity:
             <select class="form-control" id="quantity">
                 <option>1/2</option>
@@ -37,7 +35,7 @@
             </select>
         </label>
         <label>Form:
-            <select class="form-control" id="form">
+            <select class="form-control" id="measurement">
                 <option>teaspoon</option>
                 <option>tablespoon</option>
                 <option>cup</option>
@@ -52,16 +50,18 @@
                 <option>box</option>
             </select>
         </label>
-        <label>Ingredient:   </label>
-        <select th:for="ingredients">
-            <option th:each="ingredient : ${ingredients}"
-                    th:value="${ingredient}"
-                    th:text="${ingredient.name}"></option>
-        </select>
+        <label>Ingredient:
+            <select class="form-control" th:for="ingredients" id="ingredient">
+                <option th:each="ingredient : ${ingredients}"
+                        th:value="${ingredient}"
+                        th:text="${ingredient.name}"></option>
+            </select>
+        </label>
+        <button id="add-more" onclick="addInput('dynamicInput');">Add another ingredient</button>
     </div>
     <div>
         <label>Directions
-            <input th:field="${recipe.directions}">
+            <textarea th:field="${recipe.directions}"></textarea>
         </label>
         <p th:errors="${recipe.directions}"></p>
     </div>
@@ -78,5 +78,6 @@
         <input type="submit" class="btn btn-primary" value="Submit" />
     </div>
 </form>
+
 </body>
 </html>
