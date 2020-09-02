@@ -7,6 +7,12 @@
 <div th:replace="fragments :: page-header"></div>
 
 <h1>Add Ingredient</h1>
+
+<div>
+    <p th:each="ingredient : ${ingredients}"></p>
+</div>
+<br>
+<br>
 <form method="post">
     <div>
         <label class="col-form-label">Ingredient

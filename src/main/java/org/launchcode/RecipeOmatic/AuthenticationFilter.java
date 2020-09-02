@@ -1,7 +1,7 @@
 package org.launchcode.RecipeOmatic;
 
 import org.launchcode.RecipeOmatic.Controllers.AuthenticationController;
-import org.launchcode.RecipeOmatic.Data.UserRepository;
+import org.launchcode.RecipeOmatic.Models.Data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 

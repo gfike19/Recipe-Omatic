@@ -7,24 +7,21 @@
 
 <div th:replace="fragments :: page-header"></div>
 
-<div>
+<div class="container body-content">
 
-    <form th:action="@{/search/results}" method = "post">
-        <h2>Search by:</h2>
-
+    <form th:action="@{/search/results}" method = "post" class="form-group">
+        <h1>Search by:</h1>
         <p>
-            <span th:each="column : ${columns}">
+        <span th:each="column : ${columns}" class="form-check-label">
                 <input
                         type="radio"
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        th:checked="${column.key == checkedValue}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
-
         </p>
-
         <p>
             <label for="searchTerm">Keyword:</label>
             <input type="text" name="searchTerm" id="searchTerm" />
@@ -35,21 +32,29 @@
 
     <hr />
 
-    <table>
+    <table class="table table-striped">
+        <thead>
+        <tr class="table-primary">
+            <th scope="col">Recipes: </th>
+            <th scope="col">Categories: </th>
+            <th scope="col">Ingredients</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr th:each="recipe : ${recipes}">
             <td>
-                <p>
-                    Recipe Id:
-                    <a th:href="@{'/view/' + ${recipe.id}}" th:text="${recipe.id}"></a>
-                </p>
-                <p th:text="${'Name: ' + recipe.name}"></p>
-                <p>
-                    Type:
-                    <a th:href="@{'/ingredients/view/' + ${recipe.category}}" th:text="${recipe.category}"></a>
-                </p>
-
+                <li>
+                    <a th:href="@{'/view/' + ${recipe.name}}" th:text="${recipe.name}"></a>
+                </li>
+            </td>
+            <td>
+                <li th:text="${recipe.recipeCategory.name}"></li>
+            </td>
+            <td>
+                <li th:text="${recipe.ingredients}"></li>
             </td>
         </tr>
+        </tbody>
     </table>
 
 </div>

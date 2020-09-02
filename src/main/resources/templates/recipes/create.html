@@ -15,7 +15,7 @@
         </label>
         <p th:errors="${recipe.name}"></p>
     </div>
-        <div id="dynamicInput" class="form-inline">Ingredients:
+    <div class="form-inline">Ingredients:
         <label>Quantity:
             <select class="form-control" id="quantity">
                 <option>1/2</option>
@@ -57,7 +57,6 @@
                         th:text="${ingredient.name}"></option>
             </select>
         </label>
-        <button id="add-more" onclick="addInput('dynamicInput');">Add another ingredient</button>
     </div>
     <div>
         <label>Directions
@@ -67,12 +66,13 @@
     </div>
     <div>
         <label> Category
-            <select th:field="${recipe.type}">
-                <option th:each="type : ${types}"
-                        th:value="${type}"
-                        th:text="${type.displayName}">
+            <select th:field="${recipe.recipeCategory}">
+                <option th:each="recipeCategory : ${categories}"
+                        th:value="${recipeCategory.id}"
+                        th:text="${recipeCategory.name}">
                 </option>
             </select>
+            <p class="error" th:errors="${recipe.recipeCategory}"></p>
         </label>
 
         <input type="submit" class="btn btn-primary" value="Submit" />

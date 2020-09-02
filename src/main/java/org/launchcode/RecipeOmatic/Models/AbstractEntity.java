@@ -1,4 +1,4 @@
-package org.launchcode.RecipeOmatic;
+package org.launchcode.RecipeOmatic.Models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

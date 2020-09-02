@@ -1,4 +1,6 @@
-package org.launchcode.RecipeOmatic;
+package org.launchcode.RecipeOmatic.Models;
+
+import org.launchcode.RecipeOmatic.Models.Recipe;
 
 import java.util.ArrayList;
 
@@ -33,7 +35,7 @@ public class RecipeData {
         if (fieldName.equals("name")){
             theValue = recipe.getName();
         } else if (fieldName.equals("category")){
-            theValue = recipe.getType().toString();
+            theValue = recipe.getRecipeCategory().toString();
         } else {
             theValue = recipe.getIngredients().toString();
         }
@@ -52,7 +54,7 @@ public class RecipeData {
                 results.add(recipe);
             } else if (recipe.getIngredients().toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
-            } else if (recipe.getType().toString().toLowerCase().contains(lower_val)) {
+            } else if (recipe.getRecipeCategory().toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
             } else if (recipe.toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);

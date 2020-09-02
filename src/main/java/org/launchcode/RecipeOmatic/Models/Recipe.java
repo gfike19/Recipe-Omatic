@@ -1,42 +1,38 @@
-package org.launchcode.RecipeOmatic;
+package org.launchcode.RecipeOmatic.Models;
 
-import org.launchcode.RecipeOmatic.DTO.RecipeType;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Recipe extends AbstractEntity{
+public class Recipe extends AbstractEntity {
 
     @Column
     private String name;
 
     @ManyToMany
-    @Column
-    private List<Ingredient> ingredients = new ArrayList<>();
+    @JoinTable
+    private final List<Ingredient> ingredients = new ArrayList<>();
 
     @Column
     private String directions;
 
-    @Column
-    private RecipeType type;
+    @ManyToOne
+    @NotNull(message = "Category is required")
+    private RecipeCategory recipeCategory;
 
     public Recipe(){}
 
-    public Recipe(List<Ingredient> ingredients, String directions, RecipeType type) {
+    public Recipe(String directions, RecipeCategory recipeCategory) {
         super();
-        this.ingredients = ingredients;
         this.directions = directions;
-        this.type = type;
+        this.recipeCategory = recipeCategory;
     }
 
     public List<Ingredient> getIngredients() {
         return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
     }
 
     public String getDirections() {
@@ -55,11 +51,11 @@ public class Recipe extends AbstractEntity{
         this.name = name;
     }
 
-    public RecipeType getType() {
-        return type;
+    public RecipeCategory getRecipeCategory() {
+        return recipeCategory;
     }
 
-    public void setType(RecipeType type) {
-        this.type = type;
+    public void setRecipeCategory(RecipeCategory recipeCategory) {
+        this.recipeCategory = recipeCategory;
     }
 }

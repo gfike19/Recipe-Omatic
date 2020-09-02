@@ -1,10 +1,10 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
-import org.launchcode.RecipeOmatic.DTO.RecipeType;
-import org.launchcode.RecipeOmatic.Data.IngredientRepository;
-import org.launchcode.RecipeOmatic.Data.RecipeRepository;
-import org.launchcode.RecipeOmatic.Recipe;
-import org.launchcode.RecipeOmatic.RecipeData;
+import org.launchcode.RecipeOmatic.Models.Data.IngredientRepository;
+import org.launchcode.RecipeOmatic.Models.Data.RecipeCategoryRepository;
+import org.launchcode.RecipeOmatic.Models.Data.RecipeRepository;
+import org.launchcode.RecipeOmatic.Models.Recipe;
+import org.launchcode.RecipeOmatic.Models.RecipeData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,27 +24,34 @@ public class SearchController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    @Autowired
+    private RecipeCategoryRepository recipeCategoryRepository;
 
-    @RequestMapping("")
+
+    @RequestMapping(value = "")
     public String search(Model model){
         model.addAttribute("columns", columnChoices);
-        model.addAttribute("recipes", recipeRepository.findAll());
-        model.addAttribute("ingredients", ingredientRepository.findAll());
-        model.addAttribute("category", RecipeType.values());
+        String checkedValue = "all";
+        model.addAttribute("checkedValue", checkedValue);
         return "search";
     }
 
-    @PostMapping("results")
+    @PostMapping(value = "results")
     public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
         Iterable<Recipe> recipes;
         if(searchTerm.toLowerCase().equals("all") || searchTerm.equals("")){
             recipes = recipeRepository.findAll();
+            String checkedValue = searchType + "";
+            model.addAttribute("checkedValue", checkedValue);
+
         }else {
             recipes = RecipeData.findByColumnAndValue(searchType, searchTerm, recipeRepository.findAll());
         }
-        model.addAttribute("column", columnChoices);
-        model.addAttribute("title", "Recipes with " + columnChoices.get(searchType) + ": " + searchTerm);
+        model.addAttribute("columns", columnChoices);
         model.addAttribute("recipes", recipes);
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+        model.addAttribute("categories", recipeCategoryRepository.findAll());
+
         return "search";
     }
 }

@@ -1,11 +1,11 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
-import org.launchcode.RecipeOmatic.DTO.RecipeDTO;
-import org.launchcode.RecipeOmatic.DTO.RecipeType;
-import org.launchcode.RecipeOmatic.Data.IngredientRepository;
-import org.launchcode.RecipeOmatic.Data.RecipeRepository;
-import org.launchcode.RecipeOmatic.Recipe;
-import org.launchcode.RecipeOmatic.RecipeData;
+import org.launchcode.RecipeOmatic.Models.DTO.RecipeDTO;
+import org.launchcode.RecipeOmatic.Models.Data.IngredientRepository;
+import org.launchcode.RecipeOmatic.Models.Data.RecipeCategoryRepository;
+import org.launchcode.RecipeOmatic.Models.Data.RecipeRepository;
+import org.launchcode.RecipeOmatic.Models.Recipe;
+import org.launchcode.RecipeOmatic.Models.RecipeData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,41 +27,48 @@ public class ListController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    @Autowired
+    private RecipeCategoryRepository recipeCategoryRepository;
+
     static HashMap<String, String> columnChoices = new HashMap<>();
 
     public ListController () {
         columnChoices.put("all", "All");
         columnChoices.put("ingredients", "Ingredients");
         columnChoices.put("recipes", "Recipes");
-        columnChoices.put("types", "Types");
+        columnChoices.put("categories", "Categories");
+        columnChoices.put("directions", "Directions");
+        columnChoices.put("id", "Id");
     }
 
     @RequestMapping("")
     public String list(Model model) {
-        model.addAttribute("recipe", recipeRepository.findAll());
-        model.addAttribute("ingredient", ingredientRepository.findAll());
-        model.addAttribute("type", RecipeType.values());
+        model.addAttribute("recipes", recipeRepository.findAll());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+        model.addAttribute("categories", recipeCategoryRepository.findAll());
         return "list";
     }
 
     @RequestMapping(value = "recipes")
-    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
+    public String listRecipesByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
         Iterable<Recipe> recipes;
         if (column.toLowerCase().equals("all")){
             recipes = recipeRepository.findAll();
             model.addAttribute("title", "All Recipes");
         } else {
             recipes = RecipeData.findByColumnAndValue(column, value, recipeRepository.findAll());
-            model.addAttribute("title", "Recipes with " + columnChoices.get(column) + ": " + value);
         }
+        model.addAttribute("columns", columnChoices);
         model.addAttribute("recipes", recipes);
+        model.addAttribute("categories", recipeCategoryRepository.findAll());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
 
         return "recipeList";
     }
 
-    @GetMapping(value = "type")
+    @GetMapping(value = "categories")
     public String displayByType(Model model){
-        model.addAttribute("type", RecipeType.values());
+        model.addAttribute("categories", recipeCategoryRepository.findAll());
         return "categoryList";
     }
 
@@ -70,7 +77,7 @@ public class ListController {
         Optional<Recipe> optRecipe = recipeRepository.findById(recipeId);
         if (optRecipe.isPresent()) {
             Recipe recipe = (Recipe) optRecipe.get();
-            if(recipe.getType() == recipe.getType()){
+            if(recipe.getRecipeCategory() == recipe.getRecipeCategory()){
                 model.addAttribute("recipe", recipe);
                 RecipeDTO recipeDTO = new RecipeDTO();
                 model.addAttribute("recipeDTO", recipeDTO);

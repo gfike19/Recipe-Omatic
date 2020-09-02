@@ -1,8 +1,8 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
-import org.launchcode.RecipeOmatic.DTO.LoginFormDTO;
-import org.launchcode.RecipeOmatic.DTO.RegisterFormDTO;
-import org.launchcode.RecipeOmatic.Data.UserRepository;
+import org.launchcode.RecipeOmatic.Models.DTO.LoginFormDTO;
+import org.launchcode.RecipeOmatic.Models.DTO.RegisterFormDTO;
+import org.launchcode.RecipeOmatic.Models.Data.UserRepository;
 import org.launchcode.RecipeOmatic.EndUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

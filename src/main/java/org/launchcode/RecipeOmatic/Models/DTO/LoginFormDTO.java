@@ -1,4 +1,4 @@
-package org.launchcode.RecipeOmatic.DTO;
+package org.launchcode.RecipeOmatic.Models.DTO;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

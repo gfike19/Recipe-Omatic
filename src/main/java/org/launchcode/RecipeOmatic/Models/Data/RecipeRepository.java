@@ -1,6 +1,6 @@
-package org.launchcode.RecipeOmatic.Data;
+package org.launchcode.RecipeOmatic.Models.Data;
 
-import org.launchcode.RecipeOmatic.Recipe;
+import org.launchcode.RecipeOmatic.Models.Recipe;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

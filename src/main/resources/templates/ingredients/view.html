@@ -8,13 +8,21 @@
 
 <body class="container  body-content">
 
-<h1 th:text="${'Ingredients: ' + ingredient.name}">Default Title</h1>
+<h1>Ingredients list: </h1>
 
-<div>
+<div th:each="ingredient : ${ingredients}">
     <p th:text="${'ID: ' + ingredient.id}"></p>
     <p th:text="${'Name: ' + ingredient.name}"></p>
 </div>
 
+<div>
+    <p>Used in these recipes: </p>
+    <ul th:each="recipe : ${recipes}">
+        <li>
+            <a th:href="@{'/recipes/view/' + ${recipe.id}}" th:text="${recipe.name}"></a>
+        </li>
+    </ul>
+</div>
 
 </body>
 </html>

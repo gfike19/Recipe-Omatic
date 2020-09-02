@@ -8,26 +8,32 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div>
-    <h2>View Recipes</h2>
+    <h2>View Recipes by Category</h2>
 </div>
 
-<table class="table table-hover">
+<table class="table table-striped">
     <thead>
-    <tr>
-        <th scope="col">All</th>
-        <th scope="col">By category: </th>
+    <tr class="table-primary">
+        <th>All</th>
+        <th>Recipes: </th>
+        <th>Categories: </th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td class="table-primary">
+        <td>
             <li>
                 <a th:href="@{/list/recipes(column='All',value='View All')}">View All</a>
             </li>
         </td>
         <td>
-            <li th:each="type : ${types}">
-                <a th:href="@{/list/recipes(column=type,value=${type.name)}" th:text="${type.name}"></a>
+            <li th:each="recipe : ${recipes}">
+                <a th:href="@{/list/recipes(column='recipes',value=${recipe.name})}" th:text="${recipe.name}">/a>
+            </li>
+        </td>
+        <td>
+            <li th:each="category : ${categories}">
+                <a th:href="@{/list/recipes(column='recipes',value=${category.name})}" th:text="${category.name}">/a>
             </li>
         </td>
     </tr>

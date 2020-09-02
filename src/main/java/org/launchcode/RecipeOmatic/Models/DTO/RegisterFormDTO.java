@@ -1,4 +1,4 @@
-package org.launchcode.RecipeOmatic.DTO;
+package org.launchcode.RecipeOmatic.Models.DTO;
 
 public class RegisterFormDTO extends LoginFormDTO {
 

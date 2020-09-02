@@ -1,8 +1,9 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
-import org.launchcode.RecipeOmatic.DTO.RecipeDTO;
-import org.launchcode.RecipeOmatic.Data.IngredientRepository;
-import org.launchcode.RecipeOmatic.Ingredient;
+import org.launchcode.RecipeOmatic.Models.DTO.RecipeDTO;
+import org.launchcode.RecipeOmatic.Models.Data.IngredientRepository;
+import org.launchcode.RecipeOmatic.Models.Data.RecipeRepository;
+import org.launchcode.RecipeOmatic.Models.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,10 @@ public class IngredientController {
 
     @Autowired
     private IngredientRepository ingredientRepository;
+    @Autowired
+    private RecipeRepository recipeRepository;
 
-    @GetMapping
+    @GetMapping("index")
     public String displayAllIngredients(Model model) {
         model.addAttribute("title", "All Ingredients");
         model.addAttribute("ingredients", ingredientRepository.findAll());
@@ -29,7 +32,6 @@ public class IngredientController {
     public String displayAddIngredientForm(Model model){
         model.addAttribute("title", "Add Ingredient");
         model.addAttribute(new Ingredient());
-        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "ingredients/create";
     }
 
@@ -62,15 +64,17 @@ public class IngredientController {
 
     @GetMapping("view/{ingredientId}")
     public String ViewAllIngredients(Model model, @PathVariable int ingredientId){
-        Optional optIngredient = ingredientRepository.findById(ingredientId);
+        Optional<Ingredient>optIngredient = ingredientRepository.findById(ingredientId);
         if (optIngredient.isPresent()){
             Ingredient ingredient = (Ingredient) optIngredient.get();
-            model.addAttribute("ingredient", ingredient);
+            model.addAttribute("ingredients", ingredient);
             RecipeDTO recipeDTO = new RecipeDTO();
             model.addAttribute("recipeDTO", recipeDTO);
+            model.addAttribute("recipes", recipeRepository.findAll());
             return "ingredients/view";
         } else {
-            return "redirect:../";
+            model.addAttribute("title", "Invalid Ingredient ID: " + ingredientId);
+            return "redirect:";
         }
     }
 }

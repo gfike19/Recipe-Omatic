@@ -1,4 +1,4 @@
-package org.launchcode.RecipeOmatic.Data;
+package org.launchcode.RecipeOmatic.Models.Data;
 
 import org.launchcode.RecipeOmatic.EndUser;
 import org.springframework.data.repository.CrudRepository;

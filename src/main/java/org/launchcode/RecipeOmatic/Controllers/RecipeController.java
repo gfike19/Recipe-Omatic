@@ -1,18 +1,16 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
-import org.launchcode.RecipeOmatic.DTO.RecipeDTO;
-import org.launchcode.RecipeOmatic.DTO.RecipeType;
-import org.launchcode.RecipeOmatic.Data.IngredientRepository;
-import org.launchcode.RecipeOmatic.Data.RecipeRepository;
-import org.launchcode.RecipeOmatic.Ingredient;
-import org.launchcode.RecipeOmatic.Recipe;
+import org.launchcode.RecipeOmatic.Models.DTO.RecipeDTO;
+import org.launchcode.RecipeOmatic.Models.Data.IngredientRepository;
+import org.launchcode.RecipeOmatic.Models.Data.RecipeCategoryRepository;
+import org.launchcode.RecipeOmatic.Models.Data.RecipeRepository;
+import org.launchcode.RecipeOmatic.Models.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -25,11 +23,32 @@ public class RecipeController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    @Autowired
+    private RecipeCategoryRepository recipeCategoryRepository;
+
+    //    @GetMapping
+//    public String displayRecipes(@RequestParam(required = false) Integer categoryId, Model model) {
+//
+//        if (categoryId == null) {
+//            model.addAttribute("title", "All Recipes");
+//            model.addAttribute("recipes", recipeRepository.findAll());
+//        } else {
+//            Optional<RecipeCategory> result = recipeCategoryRepository.findById(categoryId);
+//            if (result.isEmpty()) {
+//                model.addAttribute("title", "Invalid Category ID: " + categoryId);
+//            } else {
+//                RecipeCategory category = result.get();
+//                model.addAttribute("title", "Recipes in category: " + category.getName());
+//                model.addAttribute("recipes", category.getRecipes());
+//            }
+//        }
+//
+//        return "recipes/index";
+//    }
     @GetMapping("")
     public String displayAllRecipes(Model model) {
         model.addAttribute("title", "All Recipes");
         model.addAttribute("recipes", recipeRepository.findAll());
-        model.addAttribute("ingredients", ingredientRepository.findAll());
         return "recipes/index";
     }
 
@@ -37,8 +56,9 @@ public class RecipeController {
     public String displayCreateRecipeForm(Model model){
         model.addAttribute("title", "Create Recipe");
         model.addAttribute(new Recipe());
-        model.addAttribute("types", RecipeType.values());
+        model.addAttribute("categories", recipeCategoryRepository.findAll());
         model.addAttribute("ingredients", ingredientRepository.findAll());
+        model.addAttribute("recipes", recipeRepository.findAll());
         return "recipes/create";
     }
 
@@ -77,19 +97,15 @@ public class RecipeController {
         if (optRecipe.isPresent()) {
             Recipe recipe = (Recipe) optRecipe.get();
             model.addAttribute("recipe", recipe);
-            RecipeDTO recipeDTO = new RecipeDTO();
-            model.addAttribute("recipeDTO", recipeDTO);
+//            RecipeDTO recipeDTO = new RecipeDTO();
+//            model.addAttribute("recipeDTO", recipeDTO);
+//            model.addAttribute("ingredients", ingredientRepository.findAll());
+//            model.addAttribute("categories", recipeCategoryRepository.findAll());
             return "recipes/view";
         } else {
             model.addAttribute("title", "Invalid recipe ID: " + recipeId);
             return "redirect:";
         }
-    }
-
-    @GetMapping("recipeList")
-    public String viewAllRecipes(Model model) {
-        model.addAttribute("recipes", recipeRepository.findAll());
-        return "recipes/recipeList";
     }
 
 }

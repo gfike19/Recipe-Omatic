@@ -10,7 +10,7 @@
 <p th:unless="${recipes} and ${recipes.size()}">No Recipes!</p>
 
 <div>
-    <h2 th:text="${'Recipe: ' + recipe.type}">View Recipes</h2>
+    <h2 th:text="${'Recipe: ' + recipe.recipeCategory}">View Recipes</h2>
 </div>
 
 <table class="table table-hover">
@@ -23,7 +23,7 @@
     <tr>
         <td class="table-primary">
             <li th:each>
-                <a th:href="@{/list/recipes(column='All',value='${recipe.type}')}">View All</a>
+                <a th:href="@{/list/recipes(column='All',value='${recipe.recipeCategory}')}">View All</a>
             </li>
         </td>
     </tr>
