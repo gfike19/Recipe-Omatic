@@ -1,5 +1,6 @@
 package org.launchcode.RecipeOmatic.Controllers;
 
+import org.launchcode.RecipeOmatic.Models.DTO.IngredientCreationDTO;
 import org.launchcode.RecipeOmatic.Models.DTO.RecipeDTO;
 import org.launchcode.RecipeOmatic.Models.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Models.Data.RecipeRepository;
@@ -32,6 +33,12 @@ public class IngredientController {
     public String displayAddIngredientForm(Model model){
         model.addAttribute("title", "Add Ingredient");
         model.addAttribute(new Ingredient());
+
+//        IngredientCreationDTO ingredientForm = new IngredientCreationDTO();
+//        for (int i = 1; i < 15; i++){
+//            ingredientForm.addIngredient(new Ingredient());
+//        }
+
         return "ingredients/create";
     }
 

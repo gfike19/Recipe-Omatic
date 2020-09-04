@@ -16,7 +16,6 @@ public class Recipe extends AbstractEntity {
     @JoinTable
     private final List<Ingredient> ingredients = new ArrayList<>();
 
-    @Column
     private String directions;
 
     @ManyToOne

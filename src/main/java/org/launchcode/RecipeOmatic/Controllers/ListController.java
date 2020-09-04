@@ -37,8 +37,6 @@ public class ListController {
         columnChoices.put("ingredients", "Ingredients");
         columnChoices.put("recipes", "Recipes");
         columnChoices.put("categories", "Categories");
-        columnChoices.put("directions", "Directions");
-        columnChoices.put("id", "Id");
     }
 
     @RequestMapping("")
@@ -49,22 +47,22 @@ public class ListController {
         return "list";
     }
 
-    @RequestMapping(value = "recipes")
-    public String listRecipesByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
-        Iterable<Recipe> recipes;
-        if (column.toLowerCase().equals("all")){
-            recipes = recipeRepository.findAll();
-            model.addAttribute("title", "All Recipes");
-        } else {
-            recipes = RecipeData.findByColumnAndValue(column, value, recipeRepository.findAll());
-        }
-        model.addAttribute("columns", columnChoices);
-        model.addAttribute("recipes", recipes);
-        model.addAttribute("categories", recipeCategoryRepository.findAll());
-        model.addAttribute("ingredients", ingredientRepository.findAll());
-
-        return "recipeList";
-    }
+//    @RequestMapping(value = "recipes")
+//    public String listRecipesByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
+////        Iterable<Recipe> recipes;
+////        if (column.toLowerCase().equals("all")){
+////            recipes = recipeRepository.findAll();
+////            model.addAttribute("title", "All Recipes");
+////        } else {
+////            recipes = RecipeData.findByColumnAndValue(column, value, recipeRepository.findAll());
+////        }
+////        model.addAttribute("columns", columnChoices);
+////        model.addAttribute("recipes", recipes);
+////        model.addAttribute("categories", recipeCategoryRepository.findAll());
+////        model.addAttribute("ingredients", ingredientRepository.findAll());
+//
+//        return "recipeList";
+//    }
 
     @GetMapping(value = "categories")
     public String displayByType(Model model){
@@ -81,8 +79,9 @@ public class ListController {
                 model.addAttribute("recipe", recipe);
                 RecipeDTO recipeDTO = new RecipeDTO();
                 model.addAttribute("recipeDTO", recipeDTO);
+                model.addAttribute("ingredients", ingredientRepository.findAll());
             }
-            return "view";
+            return "recipeList";
         } else {
             model.addAttribute("title", "Invalid recipe ID: " + recipeId);
             return "redirect:";

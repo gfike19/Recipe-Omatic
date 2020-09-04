@@ -5,6 +5,7 @@ import org.launchcode.RecipeOmatic.Models.Data.IngredientRepository;
 import org.launchcode.RecipeOmatic.Models.Data.RecipeCategoryRepository;
 import org.launchcode.RecipeOmatic.Models.Data.RecipeRepository;
 import org.launchcode.RecipeOmatic.Models.Recipe;
+import org.launchcode.RecipeOmatic.Models.RecipeCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ public class RecipeController {
     @Autowired
     private RecipeCategoryRepository recipeCategoryRepository;
 
-    //    @GetMapping
+//    @GetMapping
 //    public String displayRecipes(@RequestParam(required = false) Integer categoryId, Model model) {
 //
 //        if (categoryId == null) {
