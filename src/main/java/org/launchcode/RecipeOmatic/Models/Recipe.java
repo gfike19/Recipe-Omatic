@@ -1,6 +1,5 @@
 package org.launchcode.RecipeOmatic.Models;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

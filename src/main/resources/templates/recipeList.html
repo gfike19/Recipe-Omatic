@@ -11,17 +11,14 @@
 </div>
 
 <div th:each="selected : ${recipe}">
-<!--    <p th:text="${selected.id}"></p>-->
-    <h1 th:text="${selected.name}"></h1>
-<!--    <P th:text="${'Ingredients: ' + selected.ingredients}"></P>-->
+    <h1 th:text="${selected.name}">
+    </h1>
     <ul th:each="ingredient : ${ingredients}">
         <li th:text="${ingredient.name}"></li>
     </ul>
-    <p th:text="${'Directions: ' + selected.directions}"></p>
-    <p th:text="${'Category: ' + selected.recipeCategory.name}"></p>
+    <p th:text="${'Directions:  ' + selected.directions}"></p>
+    <p th:text="${'Category:  ' + selected.recipeCategory.name}"></p>
 </div>
-
-
 
 </body>
 </html>

@@ -15,11 +15,19 @@ public class Ingredient extends AbstractEntity {
     @ManyToMany(mappedBy = "ingredients")
     private final List<Recipe> recipes = new ArrayList<>();
 
+    @Column
+    private String measurement;
+
+    @Column
+    private Integer quantity;
+
     public Ingredient(){}
 
-    public Ingredient(String name){
+    public Ingredient(String name, String measurement, Integer quantity){
         super();
         this.name = name;
+        this.measurement = measurement;
+        this.quantity = quantity;
     }
 
     public String getName() { return name; }
@@ -28,5 +36,21 @@ public class Ingredient extends AbstractEntity {
 
     public List<Recipe> getRecipes() {
         return recipes;
+    }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
