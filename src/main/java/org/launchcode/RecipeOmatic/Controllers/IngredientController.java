@@ -36,9 +36,14 @@ public class IngredientController {
     }
 
     @PostMapping("create")
+<<<<<<< HEAD
     public String processAddIngredientForm(@ModelAttribute Ingredient newIngredient, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+=======
+    public String processAddIngredientForm(@ModelAttribute Ingredient newIngredient, Errors errors, Model model){
+        if(errors.hasErrors()){
+>>>>>>> ba4db64253c48a66707162634504ad65596b2887
             model.addAttribute("errors", errors);
             return "ingredients/create";
         }
@@ -68,6 +73,8 @@ public class IngredientController {
         Optional<Ingredient> optIngredient = ingredientRepository.findById(ingredientId);
         if (optIngredient.isPresent()) {
             Ingredient ingredient = (Ingredient) optIngredient.get();
+            model.addAttribute("quantity", ingredient.getQuantity());
+            model.addAttribute("measurement", ingredient.getMeasurement());
             model.addAttribute("ingredients", ingredient);
             RecipeDTO recipeDTO = new RecipeDTO();
             model.addAttribute("recipeDTO", recipeDTO);

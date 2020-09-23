@@ -1,6 +1,5 @@
 package org.launchcode.RecipeOmatic.Models;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ public class Recipe extends AbstractEntity {
     @JoinTable
     private final List<Ingredient> ingredients = new ArrayList<>();
 
-    @Column
     private String directions;
 
     @ManyToOne

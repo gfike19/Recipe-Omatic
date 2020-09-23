@@ -8,15 +8,17 @@
 
 <body class="container  body-content">
 
-<h1 th:text="${'Recipe: ' + recipe.name}">Default Title</h1>
+<h1 th:each="recipe : ${recipes}" th:text="${'Recipe: ' + recipe.name}">Default Title</h1>
 
-<!--<div>-->
-<!--    <p th:text="${'ID: ' + recipe.id}"></p>-->
-<!--    <p th:text="${'Name: ' + recipe.name}"></p>-->
-<!--    <p th:text="${'Ingredients: ' + recipe.ingredients}"></p>-->
-<!--    <p th:text="${'Directions: ' + recipe.directions}"></p>-->
-<!--    <p th:text="${'Category: ' + recipe.categories}"></p>-->
-<!--</div>-->
+<div>
+    <p th:text="${'ID: ' + recipe.id}"></p>
+    <p th:text="${'Name: ' + recipe.name}"></p>
+    <span th:each="ingredient : ${ingredients}">
+        <p th:text="${'Ingredients: ' + ingredient.name}"></p>
+    </span>
+    <p th:text="${'Directions: ' + recipe.directions}"></p>
+    <p th:text="${'Category: ' + recipe.categories}"></p>
+</div>
 
 <h6>BLAH</h6>
 

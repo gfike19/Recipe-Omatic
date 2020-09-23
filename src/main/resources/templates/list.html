@@ -28,12 +28,12 @@
         </td>
         <td>
             <li th:each="recipe : ${recipes}">
-                <a th:href="@{/list/recipes(column='recipes',value=${recipe.name})}" th:text="${recipe.name}">/a>
+                <a th:href="@{'/list/view/' + ${recipe.id}}" th:text="${recipe.name}"></a>
             </li>
         </td>
         <td>
             <li th:each="category : ${categories}">
-                <a th:href="@{/list/recipes(column='recipes',value=${category.name})}" th:text="${category.name}">/a>
+                <a th:href="@{/list/recipes(column='recipes',value=${category.name})}" th:text="${category.name}"></a>
             </li>
         </td>
     </tr>
