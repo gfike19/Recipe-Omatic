@@ -1,32 +1,27 @@
 package org.launchcode.RecipeOmatic.Models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @MappedSuperclass
 public class AbstractEntity {
 
     @Id
-    @GeneratedValue
+    @Column(updatable = false, nullable = false)
     private int id;
+
+    @PrePersist
+    public void autofill() {
+        UUID uuid = UUID.randomUUID();
+        this.id = (int)UUID.randomUUID().getMostSignificantBits();
+    }
 
     public int getId() {
         return id;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AbstractEntity)) return false;
-        AbstractEntity that = (AbstractEntity) o;
-        return getId() == that.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
 }

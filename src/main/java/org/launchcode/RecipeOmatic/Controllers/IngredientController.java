@@ -29,33 +29,34 @@ public class IngredientController {
     }
 
     @GetMapping("create")
-    public String displayAddIngredientForm(Model model){
+    public String displayAddIngredientForm(Model model) {
         model.addAttribute("title", "Add Ingredient");
         model.addAttribute(new Ingredient());
         return "ingredients/create";
     }
 
     @PostMapping("create")
-    public String processAddIngredientForm(@ModelAttribute Ingredient newIngredient, Errors errors, Model model){
+    public String processAddIngredientForm(@ModelAttribute Ingredient newIngredient, Errors errors, Model model) {
 
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             model.addAttribute("errors", errors);
             return "ingredients/create";
         }
         ingredientRepository.save(newIngredient);
-        return "redirect:";
+        return "redirect:/";
+
     }
 
     @GetMapping("delete")
-    public String displayDeleteIngredientForm(Model model){
+    public String displayDeleteIngredientForm(Model model) {
         model.addAttribute("title", "Delete Ingredient");
         return "ingredients/delete";
     }
 
     @PostMapping("delete")
-    public String processDeleteIngredientForm(@RequestParam(required = false) int[] ingredientId){
-        if(ingredientId != null){
-            for(int id : ingredientId){
+    public String processDeleteIngredientForm(@RequestParam(required = false) int[] ingredientId) {
+        if (ingredientId != null) {
+            for (int id : ingredientId) {
                 ingredientRepository.deleteById(id);
             }
         }
@@ -63,9 +64,9 @@ public class IngredientController {
     }
 
     @GetMapping("view/{ingredientId}")
-    public String ViewAllIngredients(Model model, @PathVariable int ingredientId){
-        Optional<Ingredient>optIngredient = ingredientRepository.findById(ingredientId);
-        if (optIngredient.isPresent()){
+    public String ViewAllIngredients(Model model, @PathVariable int ingredientId) {
+        Optional<Ingredient> optIngredient = ingredientRepository.findById(ingredientId);
+        if (optIngredient.isPresent()) {
             Ingredient ingredient = (Ingredient) optIngredient.get();
             model.addAttribute("ingredients", ingredient);
             RecipeDTO recipeDTO = new RecipeDTO();
