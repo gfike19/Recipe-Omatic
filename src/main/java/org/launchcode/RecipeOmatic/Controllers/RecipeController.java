@@ -77,8 +77,8 @@ public class RecipeController {
         }
         model.addAttribute("newIngredient", newIngredient);
         List<Ingredient> ingredients = new ArrayList<>();
-        model.addAttribute("quantity", newIngredient.getQuantity());
-        model.addAttribute("measurement", newIngredient.getMeasurement());
+//        model.addAttribute("quantity", newIngredient.getQuantity());
+//        model.addAttribute("measurement", newIngredient.getMeasurement());
         ingredients.add(newIngredient);
         model.addAttribute("ingredients", ingredients);
         ingredientRepository.save(newIngredient);
