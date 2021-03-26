@@ -22,8 +22,7 @@
                 <label>Quantity:
                     <select class="form-control" th:for="ingredients" id="quantity">
                         <option th:each="ingredient : ${ingredients}"
-                                th:value="${ingredient}"
-                                th:text="${ingredient.quantity}"></option>
+                                th:value="${ingredient}"></option>
                     </select>
                 </label>
             </TD>
@@ -31,8 +30,7 @@
                 <label>Measurement:
                     <select class="form-control" th:for="ingredients" id="measurement">
                         <option th:each="ingredient : ${ingredients}"
-                                th:value="${ingredient}"
-                                th:text="${ingredient.measurement}"></option>
+                                th:value="${ingredient}"></option>
                     </select>
                 </label>
             </TD>
